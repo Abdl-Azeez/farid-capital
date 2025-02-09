@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Timer, MessageCircle } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Timer, MessageCircle } from "lucide-react";
 import "./ComingSoon.css";
 
-const ComingSoon = () =>{
+const ComingSoon = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -11,7 +11,7 @@ const ComingSoon = () =>{
   });
 
   useEffect(() => {
-    const targetDate = new Date('2025-04-01T00:00:00');
+    const targetDate = new Date("2025-03-01T00:00:00");
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -35,7 +35,7 @@ const ComingSoon = () =>{
 
   const TimeUnit = ({ value, label }) => (
     <div className="time-unit">
-      <div className="time-value">{value.toString().padStart(2, '0')}</div>
+      <div className="time-value">{value.toString().padStart(2, "0")}</div>
       <div className="time-label">{label}</div>
     </div>
   );
@@ -61,7 +61,7 @@ const ComingSoon = () =>{
       </div>
 
       <div className="launch-date">
-        Launching April 1st, 2025
+        Launching 1st Ramadan 1445 | 1st March 2025
       </div>
 
       <a
@@ -75,6 +75,6 @@ const ComingSoon = () =>{
       </a>
     </div>
   );
-}
+};
 
 export default ComingSoon;
