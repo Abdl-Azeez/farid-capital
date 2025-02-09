@@ -64,7 +64,7 @@ const ComingSoon = () => {
         Launching 1st Ramadan 1445 | 1st March 2025
       </div>
 
-      <a
+      {/* <a
         href="https://chat.whatsapp.com/your-group-link"
         className="whatsapp-button"
         target="_blank"
@@ -72,7 +72,9 @@ const ComingSoon = () => {
       >
         <MessageCircle size={24} />
         <span>Join our WhatsApp Community</span>
-      </a>
+      </a> */}
+
+      <h1 style={{ color: "white", marginTop: "20px" }}>Farid Capital</h1>
     </div>
   );
 };
