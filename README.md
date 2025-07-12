@@ -1,12 +1,52 @@
-# React + Vite
+# Farid Capital
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Farid Capital is a modern, responsive single-page application for a Shariah-compliant, ethical investment and financial advisory firm. Built with React, Vite, Tailwind CSS, and Lucide icons, it features a beautiful UI, sliders, and seamless navigation.
 
-Currently, two official plugins are available:
+## Features
+- Hero section with Swiper slider
+- Shariah-compliant investment features
+- Services slider
+- Insights/news grid
+- Contact form
+- Modern footer with newsletter signup
+- Fully responsive and accessible
+- All icons via [Lucide React](https://lucide.dev/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Swiper.js](https://swiperjs.com/react)
+- [Lucide React](https://lucide.dev/)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+3. **Open in your browser:**
+   Visit [http://localhost:5173](http://localhost:5173)
+
+## Project Structure
+- `src/components/` — All React components
+- `public/` — Static assets (images, icons, backgrounds)
+- `index.html` — Main HTML file (title, meta, etc.)
+
+## Deployment
+You can deploy this app to Vercel, Netlify, or any static hosting provider. Just build and upload the `dist/` folder:
+
+```bash
+npm run build
+```
+
+## Customization
+- Replace images in `public/` with your own (see code comments for filenames)
+- Update company info, links, and content in the respective components
+
+## License
+Copyright © 2025 Farid Capital. All rights reserved.
