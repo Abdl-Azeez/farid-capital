@@ -3,22 +3,24 @@ import { Button } from "@/components/ui/button.jsx";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import heroJpg from '../assets/hero.jpg';
+import { smoothScrollTo } from '../utils/smoothScroll';
 
 const slides = [
   {
     title: 'Capitalizing Growth, Empowering Futures',
     desc: 'Discover tailored capital solutions and investment strategies built for lasting success.',
-    img: '/hero.jpg',
+    img: heroJpg,
   },
   {
     title: 'Shariah Compliant Investment',
     desc: 'Ethical, interest-free investment opportunities for sustainable growth.',
-    img: '/hero.jpg',
+    img: heroJpg,
   },
   {
     title: 'Expert Advisory, Proven Results',
     desc: 'Partner with our experienced team for strategic financial guidance.',
-    img: '/hero.jpg',
+    img: heroJpg,
   },
 ];
 
@@ -27,7 +29,7 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative bg-white px-0 py-0 overflow-hidden min-h-[500px]">
+    <section className="relative bg-white px-0 py-0 overflow-hidden min-h-[500px] h-screen">
       <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
@@ -46,8 +48,19 @@ const HeroSection = () => {
                 <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black leading-tight">{slide.title}</h1>
                 <p className="text-lg mb-8 text-gray-700">{slide.desc}</p>
                 <div className="flex gap-3">
-                  <Button className="bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none">Explore Services</Button>
-                  <Button variant="outline" className="border-2 border-[#F4B13D] text-black px-6 py-2 rounded hover:bg-[#F4B13D] hover:text-white transition font-semibold shadow-none bg-white">Learn More</Button>
+                  <Button 
+                    onClick={() => smoothScrollTo('services', 1000)}
+                    className="bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none cursor-pointer"
+                  >
+                    Explore Services
+                  </Button>
+                  <Button 
+                    onClick={() => smoothScrollTo('about', 1000)}
+                    variant="outline" 
+                    className="border-2 border-[#F4B13D] text-black px-6 py-2 rounded hover:bg-[#F4B13D] hover:text-white transition font-semibold shadow-none bg-white cursor-pointer"
+                  >
+                    Learn More
+                  </Button>
                 </div>
               </div>
               {/* Right: Background Image */}

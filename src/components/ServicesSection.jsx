@@ -1,91 +1,97 @@
-import React, { useRef, useState } from 'react';
-import { Button } from "@/components/ui/button.jsx";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
+import React from 'react';
+import sukukStructureImg from '../assets/sukuk_structure.jpg';
+import shariahCompliantImg from '../assets/shariah_compliant.jpg';
+import realEstateImg from '../assets/real_estate.jpg';
+import islamicPrivateImg from '../assets/islamic_private.jpg';
+import takafulImg from '../assets/takaful.jpg';
+import shariahCompliantTreasuryImg from '../assets/shariah_compliant_treasury.jpg';
+import ourProductBg from '../assets/our-product-bg.png';
 
 const services = [
   {
-    title: "Investment Advisory",
-    img: "/investment.jpg", // Replace with your actual image path
-    alt: "Investment Advisory",
-    desc: "We provide in-depth market research and strategic planning to guide your investments and minimize risk in an ever-changing global economy.",
+    title: "Sukuk Structuring and Advisory",
+    img: sukukStructureImg,
+    alt: "Sukuk Structuring and Advisory",
+    desc: "We structure government and corporate Sukuk, including green Sukuk, for infrastructure and renewable energy projects.",
   },
   {
-    title: "Capital Structuring Advisory",
-    img: "/capital.jpg", // Replace with your actual image path
-    alt: "Capital Structuring Advisory",
-    desc: "Our capital structuring services help clients secure funding that aligns with their business models and long-term goals—whether equity, debt, or hybrid instruments.",
+    title: "Shariah-Compliant Wealth Management",
+    img: shariahCompliantImg,
+    alt: "Shariah-Compliant Wealth Management", 
+    desc: "We create customized portfolios for HNWIs that adhere to Islamic principles and integrate ESG factors.",
   },
   {
-    title: "Portfolio Management Advisory",
-    img: "/portfolio.jpg", // Replace with your actual image path
-    alt: "Portfolio Management Advisory",
-    desc: "We manage and optimize your investment portfolios to ensure returns are balanced with risk, using industry-proven strategies and real-time analysis.",
+    title: "Real Estate Investment Advisory",
+    img: realEstateImg,
+    alt: "Real Estate Investment Advisory",
+    desc: "We offer guidance on developing and managing real estate projects using Islamic finance tools like Ijarah and Musharakah.",
+  },
+  {
+    title: "Islamic Private Equity and Venture Capital",
+    img: islamicPrivateImg,
+    alt: "Islamic Private Equity and Venture Capital",
+    desc: "We facilitate equity investments in Shariah-compliant sectors such as agriculture, healthcare, and fintech.",
+  },
+  {
+    title: "Takaful (Islamic Insurance) Advisory",
+    img: takafulImg,
+    alt: "Takaful (Islamic Insurance) Advisory",
+    desc: "In partnership with leading Takaful providers, we offer comprehensive risk mitigation strategies",
+  },
+  {
+    title: "Shariah-Compliant Treasury Management",
+    img: shariahCompliantTreasuryImg,
+    alt: "Shariah-Compliant Treasury Management",
+    desc: "We provide advisory on liquidity management through instruments like Islamic bonds and commodity Murabahah.",
   },
 ];
 
 const ServicesSection = () => {
-  const swiperRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
     <section
       id="services"
       className="relative py-16 px-4 md:px-6"
       style={{
-        backgroundImage: "url('/pattern-bg.png')", // Place your pattern in public/
+        backgroundImage: `url(${ourProductBg})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'top center',
+        backgroundRepeat: 'no-repeat'
       }}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#184734] mb-2">Our Services</h2>
-          <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
-            Explore our Strategic Capital Solutions, Rooted in Integrity.
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="text-[#184734]">Our </span>
+            <span className="text-[#F4B13D]">Products & Services</span>
+          </h2>
+          <p className="text-gray-600 text-md md:text-lg max-w-4xl mx-auto leading-relaxed">
+            We provide a diverse range of Shariah-compliant financial advisory services designed for high-net-worth individuals (HNWIs), private clients, and institutional investors in Nigeria and globally.
           </p>
         </div>
-        <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          loop={true}
-          slidesPerView={1}
-          breakpoints={{
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          spaceBetween={32}
-          className="w-full"
-          onSwiper={swiper => { swiperRef.current = swiper; }}
-          onSlideChange={swiper => setActiveIndex(swiper.realIndex)}
-          onAutoplay={swiper => setActiveIndex(swiper.realIndex)}
-        >
-          {services.map((service, idx) => (
-            <SwiperSlide key={service.title}>
-              <div className="bg-white rounded-lg shadow-md flex flex-col items-center p-6 mx-auto max-w-sm">
-                <img src={service.img} alt={service.alt} className="w-full h-56 object-cover rounded-md mb-6" />
-                <h3 className="text-2xl font-extrabold text-black mb-2 text-center">{service.title}</h3>
-                <p className="text-gray-700 text-base text-center mb-6">{service.desc}</p>
-                <Button className="bg-[#184734] text-white px-8 py-2 rounded hover:bg-[#256d4a] transition font-semibold w-fit mx-auto">Learn More</Button>
+        
+        <div className="space-y-6 max-w-6xl mx-auto">
+          {services.map((service) => (
+            <div key={service.title} className="rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" style={{ background: 'linear-gradient(to right, rgba(36, 81, 61, 0.2), rgba(36, 81, 61, 0.2))' }}>
+              <div className="flex flex-col md:flex-row h-full min-h-[360px]">
+                <div 
+                  className="w-full md:w-1/3 h-48 md:h-auto bg-white bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url(${service.img})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                </div>
+                <div className="w-full md:w-2/3 p-8 flex flex-col justify-evenly" style={{ background: 'linear-gradient(to right, rgba(36, 81, 61, 0.2), rgba(36, 81, 61, 0.2))' }}>
+                  <h3 className="text-xl md:text-2xl font-bold text-[#184734] mb-2 leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-800 text-base md:text-lg leading-relaxed">
+                    {service.desc}
+                  </p>
+                </div>
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {/* Custom pagination dots styled like UI */}
-        <div className="flex justify-center mt-10 gap-2">
-          {services.map((_, idx) => (
-            <button
-              key={idx}
-              aria-label={`Go to slide ${idx + 1}`}
-              className={`inline-block w-8 h-2 rounded transition-colors duration-200 focus:outline-none ${activeIndex === idx ? 'bg-[#184734]' : 'bg-gray-300'}`}
-              onClick={() => {
-                if (swiperRef.current) {
-                  swiperRef.current.slideToLoop(idx);
-                  setActiveIndex(idx);
-                }
-              }}
-            />
+            </div>
           ))}
         </div>
       </div>

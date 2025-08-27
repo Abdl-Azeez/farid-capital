@@ -11,12 +11,14 @@ function App() {
   return (
     <div className="font-sans bg-light text-dark">
       <Header />
-      <HeroSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <InsightsSection />
-      <ContactSection />
-      <Footer />
+      <main className="pt-20">
+        <HeroSection />
+        <FeaturesSection />
+        <ServicesSection />
+        {/* <InsightsSection />
+        <ContactSection /> */}
+        <Footer />
+      </main>
     </div>
   );
 }
