@@ -29,7 +29,7 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative bg-white px-0 py-0 overflow-hidden min-h-[500px] h-screen">
+    <section className="relative bg-white px-0 pb-0 pt-10 overflow-hidden min-h-[500px] h-screen">
       <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
