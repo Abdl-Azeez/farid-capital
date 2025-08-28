@@ -5,17 +5,19 @@ import { smoothScrollTo } from '../utils/smoothScroll';
 
 const navLinks = [
   { label: 'Home', href: '#' },
-  { label: 'About Us', href: '#about' },
   { label: 'Our services', href: '#services' },
-  { label: 'Insights', href: '#insights' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Our Team', href: '/team' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
-const sectionIds = ['#', '#about', '#services', '#insights', '#contact'];
+const sectionIds = ['#', '#services'];
 
 const Header = () => {
   const [active, setActive] = useState('#');
   const [isVisible, setIsVisible] = useState(true);
+  const [isHeroSection, setIsHeroSection] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -51,6 +53,13 @@ const Header = () => {
           }
           setActive(current);
           
+          // Check if we're in hero section (first 80% of viewport height)
+          const heroSection = document.getElementById('hero');
+          if (heroSection) {
+            const heroHeight = heroSection.offsetHeight;
+            setIsHeroSection(currentScrollY < heroHeight * 0.8);
+          }
+          
           ticking = false;
         });
         ticking = true;
@@ -65,13 +74,22 @@ const Header = () => {
   // Enhanced smooth scroll handler using utility function
   const handleNavClick = (e, href) => {
     e.preventDefault();
+    
+    // Check if it's an external page link
+    if (href.startsWith('/')) {
+      // For future page redirects - currently just prevent default
+      console.log(`Future redirect to: ${href}`);
+      return;
+    }
+    
+    // Handle internal section scrolling
     const id = href === '#' ? 'hero' : href.replace('#', '');
     smoothScrollTo(id, 800);
   };
 
   return (
     <header 
-      className={`bg-white shadow-lg fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+      className={`${isHeroSection ? 'bg-white/50 backdrop-blur-sm shadow-none' : 'bg-white shadow-lg'} fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
         isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'
       }`} 
       style={{ minHeight: 80 }}
@@ -88,9 +106,13 @@ const Header = () => {
               href={link.href}
               onClick={e => handleNavClick(e, link.href)}
               className={
-                (active === link.href
-                  ? 'text-[#F4B13D] font-semibold'
-                  : 'text-black hover:text-[#184734]') +
+                (active === link.href && !link.href.startsWith('/')
+                  ? isHeroSection 
+                    ? 'text-white font-semibold' 
+                    : 'text-[#F4B13D] font-semibold'
+                  : isHeroSection 
+                    ? 'text-gray-700 hover:text-[#F4B13D]' 
+                    : 'text-black hover:text-[#F4B13D]') +
                 ' transition-colors duration-200 px-1 pb-1 text-sm'
               }
             >
@@ -98,8 +120,51 @@ const Header = () => {
             </a>
           ))}
         </nav>
-        <Button className="bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none">Free Consultation</Button>
+        
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden flex flex-col gap-1 p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
+        >
+          <span className={`block w-6 h-0.5 transition-colors ${isHeroSection ? 'bg-gray-700' : 'bg-black'}`}></span>
+          <span className={`block w-6 h-0.5 transition-colors ${isHeroSection ? 'bg-gray-700' : 'bg-black'}`}></span>
+          <span className={`block w-6 h-0.5 transition-colors ${isHeroSection ? 'bg-gray-700' : 'bg-black'}`}></span>
+        </button>
+
+        <Button className="hidden md:block bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none">Free Consultation</Button>
       </div>
+      
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t">
+          <nav className="flex flex-col py-4">
+            {navLinks.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={e => {
+                  handleNavClick(e, link.href);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={
+                  (active === link.href && !link.href.startsWith('/')
+                    ? 'text-[#F4B13D] font-semibold'
+                    : 'text-black hover:text-[#F4B13D]') +
+                  ' transition-colors duration-200 px-6 py-3 text-sm border-b border-gray-100 last:border-b-0'
+                }
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="px-6 py-3">
+              <Button className="w-full bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none">
+                Free Consultation
+              </Button>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

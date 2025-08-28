@@ -25,8 +25,7 @@ const features = [
 
 const FeaturesSection = () => (
   <section
-    id="about"
-    className="relative bg-[#1a2a2e] py-20 px-4 md:px-6 text-center"
+    className="relative bg-[#1a2a2e] py-20 px-4 md:px-6 text-center pt-16"
     style={{
       backgroundImage: `url(${marbleTexture})`,
       backgroundSize: 'cover',

@@ -3,24 +3,24 @@ import { Button } from "@/components/ui/button.jsx";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import heroJpg from '../assets/hero.jpg';
+import faridCapitalHeroSvg from '../assets/farid_capital_hero.svg';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
 const slides = [
   {
     title: 'Capitalizing Growth, Empowering Futures',
     desc: 'Discover tailored capital solutions and investment strategies built for lasting success.',
-    img: heroJpg,
+    img: faridCapitalHeroSvg,
   },
   {
     title: 'Shariah Compliant Investment',
     desc: 'Ethical, interest-free investment opportunities for sustainable growth.',
-    img: heroJpg,
+    img: faridCapitalHeroSvg,
   },
   {
     title: 'Expert Advisory, Proven Results',
     desc: 'Partner with our experienced team for strategic financial guidance.',
-    img: heroJpg,
+    img: faridCapitalHeroSvg,
   },
 ];
 
@@ -29,48 +29,47 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative bg-white px-0 pb-0 pt-10 overflow-hidden min-h-[500px] h-screen">
+    <section id="hero" className="relative bg-white px-0 py-0 overflow-hidden h-screen">
       <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         className="w-full h-full"
-        style={{ minHeight: 500 }}
+        style={{ height: '100vh' }}
         onSwiper={swiper => { swiperRef.current = swiper; }}
         onSlideChange={swiper => setActiveIndex(swiper.realIndex)}
         onAutoplay={swiper => setActiveIndex(swiper.realIndex)}
       >
         {slides.map((slide, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex flex-col md:flex-row items-center justify-between px-6 py-16 md:py-24 min-h-[500px]">
-              {/* Left: Text Content */}
-              <div className="max-w-xl z-10 md:pl-4 flex flex-col justify-center flex-1">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black leading-tight">{slide.title}</h1>
-                <p className="text-lg mb-8 text-gray-700">{slide.desc}</p>
-                <div className="flex gap-3">
-                  <Button 
-                    onClick={() => smoothScrollTo('services', 1000)}
-                    className="bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none cursor-pointer"
-                  >
-                    Explore Services
-                  </Button>
-                  <Button 
-                    onClick={() => smoothScrollTo('about', 1000)}
-                    variant="outline" 
-                    className="border-2 border-[#F4B13D] text-black px-6 py-2 rounded hover:bg-[#F4B13D] hover:text-white transition font-semibold shadow-none bg-white cursor-pointer"
-                  >
-                    Learn More
-                  </Button>
+            <div className="relative flex items-center h-screen">
+              {/* Background Image - Full Page for all devices */}
+              <div className="absolute inset-0 w-full h-full z-0">
+                <img src={slide.img} alt="Hero" className="w-full h-full object-cover object-center" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 md:from-black/60 md:via-black/40 md:to-black/20" />
+              </div>
+              
+              {/* Content Container */}
+              <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+                <div className="max-w-xl md:max-w-2xl text-center md:text-left">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white leading-tight drop-shadow-lg">{slide.title}</h1>
+                  <p className="text-base md:text-lg mb-8 text-white/90 drop-shadow-md">{slide.desc}</p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                    <Button 
+                      onClick={() => smoothScrollTo('services', 1000)}
+                      className="bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none cursor-pointer"
+                    >
+                      Explore Services
+                    </Button>
+                    <Button 
+                      onClick={() => smoothScrollTo('about', 1000)}
+                      variant="outline" 
+                      className="border-2 border-[#F4B13D] text-[#F4B13D] px-6 py-2 rounded hover:bg-[#F4B13D] hover:text-black transition font-semibold shadow-none bg-transparent cursor-pointer"
+                    >
+                      Learn More
+                    </Button>
+                  </div>
                 </div>
-              </div>
-              {/* Right: Background Image */}
-              <div className="hidden md:block absolute inset-y-0 right-0 w-2/3 z-0">
-                <img src={slide.img} alt="Hero" className="w-full h-full object-cover object-center" style={{ minHeight: 500 }} />
-                <div className="absolute inset-0 bg-gradient-to-l from-white/80 to-transparent" />
-              </div>
-              {/* For mobile, show image below text */}
-              <div className="md:hidden w-full mt-8 z-0">
-                <img src={slide.img} alt="Hero" className="w-full h-64 object-cover object-center rounded-lg" />
               </div>
             </div>
           </SwiperSlide>
@@ -82,7 +81,7 @@ const HeroSection = () => {
           <button
             key={idx}
             aria-label={`Go to slide ${idx + 1}`}
-            className={`inline-block w-8 h-2 rounded transition-colors duration-200 focus:outline-none ${activeIndex === idx ? 'bg-[#184734]' : 'bg-gray-300'}`}
+            className={`inline-block w-8 h-2 rounded transition-colors duration-200 focus:outline-none ${activeIndex === idx ? 'bg-green-800' : 'bg-gray-300'}`}
             onClick={() => {
               if (swiperRef.current) {
                 swiperRef.current.slideToLoop(idx);
