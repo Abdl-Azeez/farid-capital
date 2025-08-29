@@ -2,18 +2,21 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button.jsx";
 import logoSvg from '../assets/logo.svg';
 import { smoothScrollTo } from '../utils/smoothScroll';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const navLinks = [
   { label: 'Home', href: '#' },
   { label: 'Our services', href: '#services' },
   { label: 'About Us', href: '/about' },
-  { label: 'Our Team', href: '/team' },
+  // { label: 'Our Team', href: '/team' },
   { label: 'Contact Us', href: '/contact' },
 ];
 
 const sectionIds = ['#', '#services'];
 
 const Header = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [active, setActive] = useState('#');
   const [isVisible, setIsVisible] = useState(true);
   const [isHeroSection, setIsHeroSection] = useState(true);
@@ -44,7 +47,7 @@ const Header = () => {
           const scrollPos = currentScrollY + 90; // 90px offset for sticky header
           let current = '#';
           for (let i = sectionIds.length - 1; i >= 0; i--) {
-            const id = sectionIds[i] === '#' ? 'hero' : sectionIds[i].replace('#', '');
+            const id = sectionIds[i] === '...' ? 'hero' : sectionIds[i].replace('#', '');
             const el = document.getElementById(id);
             if (el && el.offsetTop <= scrollPos) {
               current = sectionIds[i];
@@ -74,15 +77,27 @@ const Header = () => {
   // Enhanced smooth scroll handler using utility function
   const handleNavClick = (e, href) => {
     e.preventDefault();
-    
-    // Check if it's an external page link
-    if (href.startsWith('/')) {
-      // For future page redirects - currently just prevent default
-      console.log(`Future redirect to: ${href}`);
+    if (href === '/contact') {
+      navigate('/contact');
       return;
     }
-    
-    // Handle internal section scrolling
+    if (href === '#services') {
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const el = document.getElementById('services');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        const el = document.getElementById('services');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
     const id = href === '#' ? 'hero' : href.replace('#', '');
     smoothScrollTo(id, 800);
   };
@@ -101,23 +116,103 @@ const Header = () => {
         </div>
         <nav className="hidden md:flex gap-10 text-lg font-medium">
           {navLinks.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={e => handleNavClick(e, link.href)}
-              className={
-                (active === link.href && !link.href.startsWith('/')
-                  ? isHeroSection 
-                    ? 'text-white font-semibold' 
-                    : 'text-[#F4B13D] font-semibold'
-                  : isHeroSection 
-                    ? 'text-gray-700 hover:text-[#F4B13D]' 
-                    : 'text-black hover:text-[#F4B13D]') +
-                ' transition-colors duration-200 px-1 pb-1 text-sm'
-              }
-            >
-              {link.label}
-            </a>
+            link.href === '/contact' ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={
+                  (location.pathname === '/contact'
+                    ? 'text-[#F4B13D] font-semibold'
+                    : isHeroSection 
+                      ? 'text-gray-700 hover:text-[#F4B13D]' 
+                      : 'text-black hover:text-[#F4B13D]') +
+                  ' transition-colors duration-200 px-1 pb-1 text-sm'
+                }
+              >
+                {link.label}
+              </Link>
+            ) : link.href === '/about' ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={
+                  (location.pathname === '/about'
+                    ? 'text-[#F4B13D] font-semibold'
+                    : isHeroSection 
+                      ? 'text-gray-700 hover:text-[#F4B13D]' 
+                      : 'text-black hover:text-[#F4B13D]') +
+                  ' transition-colors duration-200 px-1 pb-1 text-sm'
+                }
+              >
+                {link.label}
+              </Link>
+            ) : link.href === '#' ? (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={e => {
+                  e.preventDefault();
+                  if (location.pathname !== '/') {
+                    navigate('/');
+                    setTimeout(() => {
+                      const el = document.getElementById('hero');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  } else {
+                    const el = document.getElementById('hero');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className={
+                  (active === link.href && location.pathname === '/'
+                    ? isHeroSection 
+                      ? 'text-[#F4B13D] font-semibold' 
+                      : 'text-[#F4B13D] font-semibold'
+                    : isHeroSection 
+                      ? 'text-gray-700 hover:text-[#F4B13D]' 
+                      : 'text-black hover:text-[#F4B13D]') +
+                  ' transition-colors duration-200 px-1 pb-1 text-sm'
+                }
+              >
+                {link.label}
+              </a>
+            ) : link.href === '#services' ? (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={e => handleNavClick(e, link.href)}
+                className={
+                  (active === link.href && location.pathname === '/'
+                    ? isHeroSection 
+                      ? 'text-white font-semibold' 
+                      : 'text-[#F4B13D] font-semibold'
+                    : isHeroSection 
+                      ? 'text-gray-700 hover:text-[#F4B13D]' 
+                      : 'text-black hover:text-[#F4B13D]') +
+                  ' transition-colors duration-200 px-1 pb-1 text-sm'
+                }
+              >
+                {link.label}
+              </a>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={e => handleNavClick(e, link.href)}
+                className={
+                  (active === link.href && !link.href.startsWith('/') && location.pathname === '/'
+                    ? isHeroSection 
+                      ? 'text-white font-semibold' 
+                      : 'text-[#F4B13D] font-semibold'
+                    : isHeroSection 
+                      ? 'text-gray-700 hover:text-[#F4B13D]' 
+                      : 'text-black hover:text-[#F4B13D]') +
+                  ' transition-colors duration-200 px-1 pb-1 text-sm'
+                }
+              >
+                {link.label}
+              </a>
+            )
           ))}
         </nav>
         
@@ -169,4 +264,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;
