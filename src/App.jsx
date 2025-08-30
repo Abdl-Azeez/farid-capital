@@ -4,8 +4,6 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
 import ServicesSection from './components/ServicesSection';
-import InsightsSection from './components/InsightsSection';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import ContactPage from './components/ContactPage';
 import AboutPage from './components/AboutPage';

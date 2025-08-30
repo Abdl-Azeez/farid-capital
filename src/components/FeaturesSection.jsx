@@ -73,7 +73,7 @@ const FeaturesSection = () => (
           onClick={() => smoothScrollTo('services', 800)}
           className="text-white italic text-lg font-medium cursor-pointer hover:text-[#F4B13D] transition-colors bg-transparent border-none"
         >
-          Learn More...
+          <a href="/about" className="inline-block px-6 py-2 text-white rounded hover:bg-[#256d4a] transition font-semibold">Learn More...</a>
         </button>
       </div>
     </div>

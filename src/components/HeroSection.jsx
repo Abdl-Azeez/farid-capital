@@ -45,7 +45,7 @@ const HeroSection = () => {
             <div className="relative flex items-center h-screen">
               {/* Background Image - Full Page for all devices */}
               <div className="absolute inset-0 w-full h-full z-0">
-                <img src={slide.img} alt="Hero" className="w-full h-full object-cover object-center" />
+                <img src={slide.img} alt={slide.alt || "Farid Capital Hero Banner"} className="w-full h-full object-cover object-center" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 md:from-black/60 md:via-black/40 md:to-black/20" />
               </div>
               
@@ -66,7 +66,7 @@ const HeroSection = () => {
                       variant="outline" 
                       className="border-2 border-[#F4B13D] text-[#F4B13D] px-6 py-2 rounded hover:bg-[#F4B13D] hover:text-black transition font-semibold shadow-none bg-transparent cursor-pointer"
                     >
-                      Learn More
+                      <a href="/about" className="inline-block px-6 py-2 ">Learn More</a>
                     </Button>
                   </div>
                 </div>

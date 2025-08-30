@@ -33,11 +33,11 @@ const Footer = () => (
         <div>
           <h4 className="font-bold text-white text-lg mb-4">Useful Links</h4>
           <ul className="space-y-2 text-white/90">
-            <li><a href="#contact" onClick={createSmoothScrollHandler('contact')} className="hover:underline">Contact Us</a></li>
-            <li><a href="#contact" onClick={createSmoothScrollHandler('contact')} className="hover:underline">Get in Touch</a></li>
-            <li><a href="#" className="hover:underline">FAQs</a></li>
-            <li><a href="#about" onClick={createSmoothScrollHandler('about')} className="hover:underline">About Us</a></li>
-            <li><a href="#services" onClick={createSmoothScrollHandler('services')} className="hover:underline">Our Services</a></li>
+            <li><a href="/contact" className="hover:underline">Contact Us</a></li>
+            <li><a href="/contact" className="hover:underline">Get in Touch</a></li>
+            <li><a href="/" className="hover:underline">Home</a></li>
+            <li><a href="/about" className="hover:underline">About Us</a></li>
+            <li><a href="/#services" className="hover:underline">Our Services</a></li>
           </ul>
         </div>
         <div>

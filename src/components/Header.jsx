@@ -227,7 +227,12 @@ const Header = () => {
           <span className={`block w-6 h-0.5 transition-colors ${isHeroSection ? 'bg-gray-700' : 'bg-black'}`}></span>
         </button>
 
-        <Button className="hidden md:block bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none">Free Consultation</Button>
+        <Button 
+          className="hidden md:block bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none"
+          onClick={() => navigate('/contact')}
+        >
+          Free Consultation
+        </Button>
       </div>
       
       {/* Mobile Menu */}
@@ -235,25 +240,58 @@ const Header = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t">
           <nav className="flex flex-col py-4">
             {navLinks.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={e => {
-                  handleNavClick(e, link.href);
-                  setIsMobileMenuOpen(false);
-                }}
-                className={
-                  (active === link.href && !link.href.startsWith('/')
-                    ? 'text-[#F4B13D] font-semibold'
-                    : 'text-black hover:text-[#F4B13D]') +
-                  ' transition-colors duration-200 px-6 py-3 text-sm border-b border-gray-100 last:border-b-0'
-                }
-              >
-                {link.label}
-              </a>
+              link.label === 'Home' ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={e => {
+                    e.preventDefault();
+                    navigate('/');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={
+                    (location.pathname === '/' && active === '#' ? 'text-[#F4B13D] font-semibold' : 'text-black hover:text-[#F4B13D]') +
+                    ' transition-colors duration-200 px-6 py-3 text-sm border-b border-gray-100 last:border-b-0'
+                  }
+                >
+                  {link.label}
+                </a>
+              ) : link.label === 'Our services' ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={e => {
+                    handleNavClick(e, link.href);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={
+                    (location.pathname === '/' && active === '#services' ? 'text-[#F4B13D] font-semibold' : 'text-black hover:text-[#F4B13D]') +
+                    ' transition-colors duration-200 px-6 py-3 text-sm border-b border-gray-100 last:border-b-0'
+                  }
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={e => {
+                    handleNavClick(e, link.href);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={
+                    ((location.pathname === link.href || (link.href === '#services' && location.pathname === '/' && active === '#services'))
+                      ? 'text-[#F4B13D] font-semibold'
+                      : 'text-black hover:text-[#F4B13D]') +
+                    ' transition-colors duration-200 px-6 py-3 text-sm border-b border-gray-100 last:border-b-0'
+                  }
+                >
+                  {link.label}
+                </a>
+              )
             ))}
             <div className="px-6 py-3">
-              <Button className="w-full bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none">
+              <Button className="w-full bg-[#184734] text-white px-6 py-2 rounded hover:bg-[#256d4a] transition font-semibold shadow-none" onClick={() => { navigate('/contact'); setIsMobileMenuOpen(false); }}>
                 Free Consultation
               </Button>
             </div>
